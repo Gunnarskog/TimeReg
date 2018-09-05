@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<title>Time registration</title>
+</head>
+<body>
+	<h1>Time registration</h1>
+
+	<form action="/timereg" method="POST">
+		<input type="text" name="name" placeholder="Project name / task">
+		<input id="dateID" type="date" name="date" required>
+		<input id="startTimeID" type="time" name="startTime" required>
+		<input ide="stopTimeID" type="time" name="stopTime" required>
+		<button>Register</button>
+	</form>
+
+	<p></p>
+	<table id="mainTable" class="table table-light table-striped">
+		<thead class="thead-light">
+			<tr>
+				<th><strong>Projects</strong></th>
+			</tr>
+		</thead>
+		<tbody>	 
+			<% projects.forEach(function(project){ %>
+			<tr>
+				<th><%= project.name %></th>
+				<% project.dateAndTime.forEach(function(date_time){ %> 
+				<td>
+					Date: <%=date_time.date.getDay()+1%>/<%= date_time.date.getMonth()+1%>-<%= date_time.date.getFullYear()-2000%>
+					Time: <%= Math.floor((date_time.time)/60)%>h <%=date_time.time%60%>min
+				</td>
+				<% totTime = (totTime + date_time.time) %>	
+				<% }); %>
+
+				<td>Total time: <%= Math.floor((totTime)/60)%>h <%= totTime%60 %>min</td>
+				<td><form action="/delete" method="POST"><td><button name="del" value="<%=project._id%>">Delete</button></td></form></td>
+				<% totTime = 0%>
+				<% }); %>
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+</html>
