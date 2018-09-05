@@ -99,7 +99,7 @@ app.post("/delete", function(req, res) {
 
 
 // ========= Server listening ========= 
-var server = app.listen(80, function(req, res) {
+var server = app.listen(8000, function(req, res) {
     var host = server.address().address;
     var port = server.address().port;
     console.log("Time registration app is listening at http://%s:%s", host, port)
