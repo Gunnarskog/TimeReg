@@ -5,7 +5,6 @@ var ProjectSchema = new mongoose.Schema({
     dateAndTime: [{ date: Date, time: Number }]
 });
 
-
 var Project = mongoose.model("Project", ProjectSchema);
 
 module.exports = Project;
