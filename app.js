@@ -38,12 +38,10 @@ app.post("/timereg", function(req, res) {
     var startTime = req.body.startTime;
     var stopTime = req.body.stopTime;
 
-    console.log(req.body.del)
-    console.log(typeof(req.body.del))
-
     // Error "handling" of overnight work
-    if (startTime < stopTime) {
-
+    if (startTime > stopTime) {
+            res.redirect("/timereg")
+        } else {
         // ========== Time calculations ===========
         var startParse = startTime.split(":");
         var stopParse = stopTime.split(":");
@@ -51,7 +49,6 @@ app.post("/timereg", function(req, res) {
         var stopTime = new Date(0, 0, 0, stopParse[0], stopParse[1]).getTime();
         // =======================================
         var timeDiff = new Date(stopTime - startTime).getTime() / (1000 * 60); //Minutes
-
 
         Project.findOne({ name: name }, function(err, foundProject) {
             if (err) {
