@@ -43,7 +43,7 @@
 					<th><strong>Projects</strong></th>
 					<% projects.forEach(function(project){ %>
 					<th><%= project.name %></th>
-					<% }) %>
+					<% }); %>
 				</tr>
 			</thead>
 			<tbody>	
@@ -54,7 +54,7 @@
 					<table class="table">
 						<tr>
 							<td>
-								Date: <%= date_time.date.getDay()+1 %>/<%= date_time.date.getMonth()+1 %>-<%= date_time.date.getFullYear() %>
+								Date: <%= date_time.date.getDate() %>/<%= date_time.date.getMonth()+1 %>-<%= date_time.date.getFullYear() %>
 								<p></p>
 								Time: <%= Math.floor((date_time.time)/60) %>h <%= date_time.time%60 %>min
 							</td>
@@ -63,12 +63,12 @@
 						<% }); %>
 						<tr>
 							<td>		
-								<strong>Total time: <%= Math.floor((totTime)/60)%>h <%= totTime%60 %>min</strong>
+								<strong>Total time: <%= Math.floor((totTime)/60)%>h <%= totTime%60%>min</strong>
 							</td>
 						</tr>
 						<tr>
 							<td>	
-								<form action="/delete" method="POST"><button class="btn btn-danger	" name="del" value="<%=project._id%>">Delete</button></form>
+								<form action="/delete" method="POST"><button class="btn btn-danger" name="del" value="<%=project._id%>">Delete</button></form>
 							</td>
 						</tr>			
 						<% totTime = 0%> 				
